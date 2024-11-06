@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class PartTime extends Employee{
     
-    public PartTime(String name, int employee_ID, String email, String phone_Number, String password, int currentPoints){
-        super(name, employee_ID, email, phone_Number, password, currentPoints);
+    public PartTime(String name, int employee_ID, String email, String phone_Number, String password, int currentPoints, String role){
+        super(name, employee_ID, email, phone_Number, password, currentPoints, role);
     }
 
     
