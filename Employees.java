@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Employees{
     // List of employees
-    List<Employee> listOfEmployees = new ArrayList<>();
+    private List<Employee> listOfEmployees = new ArrayList<>();
 
     // Method adds employee to the list, is called in the Employee class
     public void addEmployee(Employee employee){
@@ -19,6 +19,6 @@ public class Employees{
     }
 
     public List<Employee> getListOfEmployees(){
-        return listOfEmployees;
+        return new ArrayList<>(listOfEmployees);
     }
 }

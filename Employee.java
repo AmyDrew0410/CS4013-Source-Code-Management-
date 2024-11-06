@@ -1,14 +1,14 @@
 public class Employee {
     // Data fields
     private String name;
-    private int emplopyee_ID;
+    private int employee_ID;
     private String email;
-    private int phone_Number;
+    private String phone_Number;
     private String password;
     private int currentPoints;
 
     //Constructor
-    public Employee(String name, int employee_ID, String email, int phone_Number, String password, int currentPoints ){
+    public Employee(String name, int employee_ID, String email, String phone_Number, String password, int currentPoints){
         this.name = name;
         this.employee_ID = employee_ID;
         this.email = email;
@@ -24,14 +24,14 @@ public class Employee {
     }
 
     public int getEmployee_ID(){
-        return emplopyee_ID;
+        return employee_ID;
     }
 
     public String getEmail(){
         return email;
     }
 
-    public int getPhone_Number(){
+    public String getPhone_Number(){
         return phone_Number;
     }
 
