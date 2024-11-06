@@ -16,7 +16,7 @@ public class Employee {
         this.phone_Number = phone_Number;
         this.password = password;
         this.currentPoints = currentPoints;
-        this.roile = role;
+        this.role = role;
         employees.addEmployee(this); // adds employee to the ListOfEmployees
     }
 
