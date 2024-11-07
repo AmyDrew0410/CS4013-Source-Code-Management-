@@ -5,18 +5,16 @@ public class Employee {
     private int employee_ID;
     private String email;
     private String phone_Number;
-    private String password;
     private int current_Points;
     private String user_Type;
 
     //Constructor
-    public Employee(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, String password, int current_Points, String user_Type){
+    public Employee(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, int current_Points, String user_Type){
         this.last_Name = first_Name;
         this.last_Name = last_Name;
         this.employee_ID = employee_ID;
         this.email = email;
         this.phone_Number = phone_Number;
-        this.password = password;
         this.current_Points = current_Points;
         this.user_Type = user_Type;
         employees.addEmployee(this); // adds employee to the ListOfEmployees
@@ -41,10 +39,6 @@ public class Employee {
 
     public String getPhone_Number(){
         return phone_Number;
-    }
-
-    public String getPassword(){
-        return password;
     }
 
     public int getCurrent_Points(){
