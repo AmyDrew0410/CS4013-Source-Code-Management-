@@ -48,4 +48,15 @@ public class Employee {
     public String user_Type(){
         return user_Type;
     }
+
+    @Override
+    public String toString(){
+        return "First name: " + first_Name + "\n" +
+               "Last name: " + last_Name + "\n" +
+               "Employee ID: " + employee_ID + "\n" +
+               "Email: " + email + "\n" +
+               "Phone number: " + phone_Number + "\n" +
+               "Current points: " + current_Points + "\n" +
+               "User type: " + user_Type + "\n";
+    }
 }

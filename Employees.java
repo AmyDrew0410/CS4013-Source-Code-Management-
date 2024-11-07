@@ -31,7 +31,7 @@ public class Employees{
         }
     }
 
-    // returns the specific employee info if the Admin, HR or the itself requests the info
+   // shows a specific employees info based on the user type
     public Employee employeeInformation(int employee_ID, String user_Type, String requestedEmployee_ID){
         for(Employee employee : listOfEmployees){
             if(employee.getEmployee_ID() == employee_ID){

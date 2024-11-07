@@ -1,9 +1,11 @@
 import java.util.Scanner;
 
 public class PartTime extends Employee{
+    private double hours_Per_Week;
     
-    public PartTime(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, int currentPoints){
-        super(first_Name, last_Name, employee_ID, email, phone_Number, currentPoints);
+    public PartTime(String first_Name, String last_Name, String email, String phone_Number, double hours_Per_Week){
+        super(first_Name, last_Name, email, phone_Number);
+        this.hours_Per_Week = hours_Per_Week;
     }
 
     
@@ -22,6 +24,11 @@ public class PartTime extends Employee{
             System.out.println("Form not filled out.");
             return false;
         }
+    }
+
+    @Override
+    public String toString(){
+        return super.toString() + "Hours worked per week: " + hours_Per_Week + "\n";
     }
 
 }
