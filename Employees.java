@@ -20,10 +20,10 @@ public class Employees{
 
     // Checks what type of user you are in order to give you access to the list of employees
     public List<Employee> getListOfEmployees(){
-        if(role.equals("Admin")){
+        if(user_Type.equals("Admin")){
         return listOfEmployees;
         }
-        else if(role.equals("HR")){
+        else if(user_Type.equals("HR")){
             return new ArrayList<>(listOfEmployees);
         }
         else{
@@ -32,11 +32,11 @@ public class Employees{
     }
 
     // returns the specific employee info if the Admin, HR or the itself requests the info
-    public Employee employeeInformation(int employee_ID, String role, String requestedEmployee_ID){
+    public Employee employeeInformation(int employee_ID, String user_Type, String requestedEmployee_ID){
         for(Employee employee : listOfEmployees){
             if(employee.getEmployee_ID() == employee_ID){
 
-                if(role.equals("HR") || role.equals("Admin") || employee_ID == requestedEmployee_ID){
+                if(user_Type.equals("HR") || user_Type.equals("Admin") || employee_ID == requestedEmployee_ID){
                     return employee;
                 }
                 else{
