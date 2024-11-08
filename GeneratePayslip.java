@@ -1,16 +1,34 @@
 public class GeneratePayslip {
     private PaymentProcess payslip;
+    private Employee employee;
 
-    //constructor to build payslip object from the payment process class and type
-    public GeneratePayslip(double grossPay, double salary, double netPay, double PRSI, double PAYE, double USC){
-        payslip = new PaymentProcess(grossPay, salary, netPay, 0.041, USC, PAYE);
+    /**
+     * this class is to generate a payslip using the employee and payment process classes
+     * as object types.
+     * author : Amy Drew
+     * student ID : 23370076
+     * @param employee
+     * @param payslip
+     */
+
+    //constructor to build payslip object from the payment process class and type and employee class and type
+    public GeneratePayslip(Employee employee, PaymentProcess payslip){
+        this.employee = employee;
+        this.payslip = payslip;
     }
 
     /**
-     * getter method to return the payslip object in the payment proces type
+     * getter method to return the payslip object in the payment process type
      * @return
      */
     public PaymentProcess getPayslip(){
         return payslip;
+    }
+
+    /**
+     * getter method to return the employee object in the employee ty[e
+     */
+    public Employee getEmployee(){
+        return employee;
     }
 }
