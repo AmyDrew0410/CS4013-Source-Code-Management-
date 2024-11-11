@@ -5,6 +5,11 @@ public class Admin extends UserTypes{
     }
 
     @Override
+    public boolean AccessEmployeeList(){
+        return true;
+    }
+
+    @Override
     public String toString(){
         return super.toString();
     }
