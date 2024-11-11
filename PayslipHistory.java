@@ -2,16 +2,18 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class PayslipHistory {
-    private List<GeneratePayslip> payslipHistory;
+    //list to hold payslip history
+    private static List<GeneratePayslip> payslipHistory = new ArrayList<>();
 
-    public PayslipHistory(){
-        payslipHistory = new ArrayList<>();
+    public static void addPayslip(GeneratePayslip payslip){
+        payslipHistory.add(payslip);
     }
 
     /**
-     * method to add an entry of generate payslip type into array list
+     * get the employee id
+     * get currentDate
+     * preset string to 25th of a year, look for highest month in that schema and put data in string
+     * array and return that
      */
-    public void addPayslip(GeneratePayslip payslip){
-        payslipHistory.add(payslip);
-    }
+
 }

@@ -15,6 +15,7 @@ public class GeneratePayslip {
     public GeneratePayslip(Employee employee, PaymentProcess payslip){
         this.employee = employee;
         this.payslip = payslip;
+        PayslipHistory.addPayslip(this);
     }
 
     /**
