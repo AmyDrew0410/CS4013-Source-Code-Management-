@@ -3,10 +3,10 @@ import java.util.List;
 
 public class Employees{
     // List of employees
-    private List<Employee> listOfEmployees = new ArrayList<>();
+    private List<UserTypes> listOfEmployees = new ArrayList<>();
 
     // Method adds employee to the list, is called in the Employee class
-    public void addEmployee(Employee employee){
+    public void addEmployee(UserTypes employee){
         if(listOfEmployees.contains(employee)){
             System.out.println("Employee already exists.");
         }else{
@@ -14,29 +14,30 @@ public class Employees{
         }
     }
 
-    public void removeEmployee(Employee employee){
+    public void removeEmployee(UserTypes employee){
         listOfEmployees.remove(employee);
     }
 
     // Checks what type of user you are in order to give you access to the list of employees
-    public List<Employee> getListOfEmployees(){
-        if(user_Type.equals("Admin")){
+    public List<UserTypes> getListOfEmployees(UserTypes users){
+        if(users instanceof Admin){
         return listOfEmployees;
         }
-        else if(user_Type.equals("HR")){
+        else if(users instanceof HR){
             return new ArrayList<>(listOfEmployees);
         }
         else{
             System.out.println("Access denied.");
+            return new ArrayList<>(); // empty list (means nothing)
         }
     }
 
    // shows a specific employees info based on the user type
-    public Employee employeeInformation(int employee_ID, String user_Type, String requestedEmployee_ID){
-        for(Employee employee : listOfEmployees){
+    public UserTypes employeeInformation(int employee_ID, UserTypes requestingUser){
+        for(UserTypes employee : listOfEmployees){
             if(employee.getEmployee_ID() == employee_ID){
 
-                if(user_Type.equals("HR") || user_Type.equals("Admin") || employee_ID == requestedEmployee_ID){
+                if(requestingUser instanceof Admin || requestingUser instanceof HR || employee.equals(requestingUser)){
                     return employee;
                 }
                 else{
