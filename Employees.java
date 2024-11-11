@@ -34,11 +34,11 @@ public class Employees{
 
    // shows a specific employees info based on the user type
     public UserTypes employeeInformation(int employee_ID, UserTypes requestingUser){
-        for(UserTypes employee : listOfEmployees){
-            if(employee.getEmployee_ID() == employee_ID){
+        for(UserTypes user : listOfEmployees){
+            if(user.getEmployee_ID() == employee_ID){
 
-                if(requestingUser instanceof Admin || requestingUser instanceof HR || employee.equals(requestingUser)){
-                    return employee;
+                if(requestingUser instanceof Admin || requestingUser instanceof HR || user.equals(requestingUser)){
+                    return user;
                 }
                 else{
                     System.out.println("Access denied.");
