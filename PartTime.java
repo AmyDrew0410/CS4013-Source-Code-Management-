@@ -13,7 +13,7 @@ public class PartTime extends Employee{
 
     public boolean validateFormFilled(){
         Scanner scanner = new Scanner();
-        System.out.println("Have you filled out the Part-time payment form? ");
+        System.out.println("Have you filled out the Part-time payment form? (y) / (n) ");
         String input = scanner.nextLine();
         scanner.close();
 
