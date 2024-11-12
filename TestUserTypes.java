@@ -8,16 +8,16 @@ public class TestUserTypes {
         HR hrUser = new HR("Bob", "Jones", 2, "bob@company.com", "123-456-7891", 80, false, employees);
         Employee regularEmployee = new Employee("Carol", "Davis", 3, "carol@company.com", "123-456-7892", 50, true, employees);
 
-        /*for (UserTypes user : employees.getListOfEmployees(adminUser))
+        for (UserTypes user : employees.getListOfEmployees(adminUser))
         System.out.println(user.toString());
 
         for (UserTypes user : employees.getListOfEmployees(hrUser))
         System.out.println(user.toString());
 
         for (UserTypes user : employees.getListOfEmployees(regularEmployee))
-        System.out.println(user.toString());*/
+        System.out.println(user.toString());
         
-        UserTypes getInfo = employees.employeeInformation(2, regularEmployee);
+        UserTypes getInfo = employees.employeeInformation(3, adminUser);
 
         System.out.println(getInfo);
     }
