@@ -8,9 +8,9 @@ public class PaymentProcess {
     private double USC;
     private double incomeTax;
     private double maxTaxCredit;
-    private LocalDate currentDate;
+    private LocalDate dateOfProcess;
 
-    Employee employee = new Employee();
+    Employee employee;
 
     /**
      * this class is to run through multiple methods to calculate the net pay once
@@ -20,14 +20,14 @@ public class PaymentProcess {
      */
 
     //payment process constructor to create obj in generate payslips class
-    public PaymentProcess(double netPay, double salary, LocalDate currentDate){
+    public PaymentProcess(double salary, LocalDate dateOfProcess, Employee employee){
+        this.employee = employee;
         this.grossPay = calcGrossPay();
-        this.netPay = netPay;
         this.salary = salary;
         this.PRSI = calcPRSI();
         this.USC = calcUSC();
         this.incomeTax = calcIncomeTax();
-        this.currentDate = currentDate;
+        this.dateOfProcess = dateOfProcess;
         this.netPay = calcNetPay(PRSI, USC, incomeTax);
     }
 
@@ -43,7 +43,7 @@ public class PaymentProcess {
 
     /**
      * Method to calculate the total prsi deduction from the grossPay depending on
-     * employees monthly earnings and the max tax credits they are entitled to
+     * am employees monthly earnings and the max tax credits they are entitled to
      * dependent on their salary.
      */
     public double calcPRSI(){
@@ -94,6 +94,7 @@ public class PaymentProcess {
      * and if their salary is above or under the band for their marital status.
       * @return
      */
+
     public double calcIncomeTax(){
         boolean maritalStatus = employee.getMaritalStatus();
         double totalIncomeTax;
@@ -113,6 +114,7 @@ public class PaymentProcess {
      * Calculates the net pay based on the results of the previous methods, using those results
      * to deduce the net pay after tax.
      */
+
     public double calcNetPay(double USCDeducted, double totalPRSIDeducted, double totalIncomeTax){
         netPay = grossPay - USCDeducted - totalPRSIDeducted - totalIncomeTax;
         return netPay;
@@ -122,6 +124,7 @@ public class PaymentProcess {
      * getter methods for global variables in the class
      * @return
      */
+
     public double getGrossPay(){
         return grossPay;
     }
@@ -135,7 +138,15 @@ public class PaymentProcess {
         return USC;
     }
 
-    public LocalDate getCurrentDate(){
-        return currentDate;
+    public double getPRSI(){
+        return PRSI;
+    }
+
+    public double getIncomeTax(){
+        return incomeTax;
+    }
+
+    public LocalDate getDateOfProcess(){
+        return dateOfProcess;
     }
 }

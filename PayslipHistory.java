@@ -1,11 +1,15 @@
-import java.util.List;
 import java.util.ArrayList;
 
 public class PayslipHistory {
     //list to hold payslip history
-    private static List<GeneratePayslip> payslipHistory = new ArrayList<>();
+    private Payslip payslip;
+    private ArrayList<Payslip> payslipHistory = new ArrayList<>();
 
-    public static void addPayslip(GeneratePayslip payslip){
+    public PayslipHistory(Payslip payslip){
+        this.payslip = payslip;
+    }
+
+    public void addPayslip(Payslip payslip){
         payslipHistory.add(payslip);
     }
 
@@ -16,4 +20,13 @@ public class PayslipHistory {
      * array and return that
      */
 
+    public String printPayslipHistory(){
+        StringBuilder payslipHistoryString = new StringBuilder();
+
+        for(Payslip eachPayslip : this.payslipHistory){
+            payslipHistoryString.append(eachPayslip.toString());
+            payslipHistoryString.append("\n\n");
+        }
+        return payslipHistoryString.toString();
+    }
 }
