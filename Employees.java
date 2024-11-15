@@ -10,7 +10,9 @@ public class Employees{
         if(listOfEmployees.contains(employee)){
             System.out.println("Employee already exists.");
         }else{
-            listOfEmployees.add(employee);
+            if(!(employee instanceof PartTime)){
+                listOfEmployees.add(employee);
+            }
         }
     }
 
