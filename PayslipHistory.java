@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class PayslipHistory {
     //list to hold payslip history
-    private Payslip payslip;
     private ArrayList<Payslip> payslipHistory = new ArrayList<>();
 
-    public PayslipHistory(Payslip payslip){
-        this.payslip = payslip;
+    public PayslipHistory(ArrayList<Payslip> payslipHistory){
+        this.payslipHistory =payslipHistory;
+
     }
 
     public void addPayslip(Payslip payslip){
@@ -28,5 +28,9 @@ public class PayslipHistory {
             payslipHistoryString.append("\n\n");
         }
         return payslipHistoryString.toString();
+    }
+
+    public ArrayList<Payslip> getPayslipHistory(){
+        return payslipHistory;
     }
 }

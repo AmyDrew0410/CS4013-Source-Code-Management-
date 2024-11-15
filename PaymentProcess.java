@@ -96,7 +96,7 @@ public class PaymentProcess {
      */
 
     public double calcIncomeTax(){
-        boolean maritalStatus = employee.getMaritalStatus();
+        boolean maritalStatus = employee.getMarital_Status();
         double totalIncomeTax;
         if(maritalStatus && salary >= 80000) {
             totalIncomeTax = 80000 * 0.2;

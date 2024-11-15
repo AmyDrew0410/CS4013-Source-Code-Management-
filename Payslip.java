@@ -3,6 +3,7 @@ import java.time.LocalDate;
 public class Payslip {
     private PaymentProcess paymentProcess;
     private Employee employee;
+    private PayslipHistory payslipHistory;
 
     /**
      * this class is to generate a payslip using the employee and payment process classes
@@ -14,10 +15,10 @@ public class Payslip {
      */
 
     //constructor to build payslip object from the payment process class and type and employee class and type
-    public Payslip(Employee employee, PaymentProcess paymentProcess){
+    public Payslip(Employee employee, PaymentProcess paymentProcess, PayslipHistory historyOfThisCycle){
         this.employee = employee;
         this.paymentProcess = paymentProcess;
-        PayslipHistory.addPayslip(this);
+        historyOfThisCycle.addPayslip(this);
     }
 
     /**
@@ -36,7 +37,7 @@ public class Payslip {
     }
 
     public int getEmployeeID(){
-        return getEmployee().getEmployeeID();
+        return getEmployee().getEmployee_ID();
     }
 
     public LocalDate getDateOfPayslip(){
