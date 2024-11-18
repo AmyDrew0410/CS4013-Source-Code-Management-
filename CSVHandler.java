@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * This class handles all CSV reading and writing methods to help de-compartmentalise the code in all classes
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 public class CSVHandler {
     //Class attributes
     private BufferedReader CSVfile;
-    private String pathName;
+    private final String pathName;
     //Default constructor for the OccupationCSV class that sets up a file reader for Occupations.csv
     //Has exception handling for if a file isn't found
     public CSVHandler(String pathName) throws FileNotFoundException {
@@ -64,7 +65,6 @@ public class CSVHandler {
         //Try catch for input output Exception handling
         try
         {
-            int count = 0;
             String nextTuple;
             while((nextTuple = CSVfile.readLine()) != null)
             {
@@ -151,7 +151,7 @@ public class CSVHandler {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        CSVfile = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(pathName)));
+        CSVfile = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(pathName))));
     }
 
 }
