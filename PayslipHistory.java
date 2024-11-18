@@ -5,21 +5,23 @@ public class PayslipHistory {
     private ArrayList<Payslip> payslipHistory = new ArrayList<>();
 
     public PayslipHistory(ArrayList<Payslip> payslipHistory){
-        this.payslipHistory =payslipHistory;
+        this.payslipHistory = payslipHistory;
 
     }
 
+    /**
+     * Void method to add a payslip to the payslip history array list.
+     * @param payslip
+     */
     public void addPayslip(Payslip payslip){
         payslipHistory.add(payslip);
     }
 
     /**
-     * get the employee id
-     * get currentDate
-     * preset string to 25th of a year, look for highest month in that schema and put data in string
-     * array and return that
+     * A printPayslipHistory method that prints the payslips within the payslip history arraylist as a string
+     * using the toString() method in the payslips class.
+     * @return
      */
-
     public String printPayslipHistory(){
         StringBuilder payslipHistoryString = new StringBuilder();
 
@@ -29,6 +31,11 @@ public class PayslipHistory {
         }
         return payslipHistoryString.toString();
     }
+
+    /**
+     *  A getter to return the payslip history after all payslips have been added to the array list
+     * @return
+     */
 
     public ArrayList<Payslip> getPayslipHistory(){
         return payslipHistory;

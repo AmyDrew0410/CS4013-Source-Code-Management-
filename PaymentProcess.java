@@ -7,10 +7,12 @@ public class PaymentProcess {
     private double PRSI;
     private double USC;
     private double incomeTax;
+    private double healthInsurance;
+    private double unionFees;
     private double maxTaxCredit;
     private LocalDate dateOfProcess;
 
-    Employee employee;
+    UserTypes employee;
 
     /**
      * this class is to run through multiple methods to calculate the net pay once
@@ -20,15 +22,17 @@ public class PaymentProcess {
      */
 
     //payment process constructor to create obj in generate payslips class
-    public PaymentProcess(double salary, LocalDate dateOfProcess, Employee employee){
+    public PaymentProcess(double salary, LocalDate dateOfProcess, UserTypes employee){
+        this.salary = salary;
         this.employee = employee;
         this.grossPay = calcGrossPay();
-        this.salary = salary;
         this.PRSI = calcPRSI();
         this.USC = calcUSC();
         this.incomeTax = calcIncomeTax();
+        this.healthInsurance = calcHealthInsurance();
+        this.unionFees = calcUnionFees();
         this.dateOfProcess = dateOfProcess;
-        this.netPay = calcNetPay(PRSI, USC, incomeTax);
+        this.netPay = calcNetPay(PRSI, USC, incomeTax, healthInsurance);
     }
 
     /**
@@ -111,12 +115,42 @@ public class PaymentProcess {
     }
 
     /**
+     * method to calculate an employees health insurance deduction based on their yearly salary and then divided
+     * by 12 to find the total deduction made to each employees monthly gross wage
+     * @return
+     */
+
+    public double calcHealthInsurance(){
+        double healthInsuranceDeducted;
+        if(salary >= 20000 && salary < 35000){
+            healthInsuranceDeducted = salary * 0.005;
+        } else if(salary >= 35001 && salary < 55000){
+            healthInsuranceDeducted = salary * 0.02;
+        } else if(salary >= 55001 && salary < 75000){
+            healthInsuranceDeducted = salary * 0.04;
+        }else{
+            healthInsuranceDeducted = salary * 0.06;
+        }
+        return healthInsuranceDeducted / 12;
+    }
+
+    public double calcUnionFees(){
+        double unionFeesDeducted;
+        if(employee.getUnionFees() == "A"){
+            unionFeesDeducted = salary * 0.005;
+        }else{
+            unionFeesDeducted = salary * 0.01;
+        }
+        return unionFeesDeducted / 12;
+    }
+
+    /**
      * Calculates the net pay based on the results of the previous methods, using those results
      * to deduce the net pay after tax.
      */
 
-    public double calcNetPay(double USCDeducted, double totalPRSIDeducted, double totalIncomeTax){
-        netPay = grossPay - USCDeducted - totalPRSIDeducted - totalIncomeTax;
+    public double calcNetPay(double USCDeducted, double totalPRSIDeducted, double totalIncomeTax, double healthInsuranceDeducted, double unionFeesDeducted){
+        netPay = grossPay - USCDeducted - totalPRSIDeducted - totalIncomeTax - healthInsuranceDeducted - unionFeesDeducted;
         return netPay;
     }
 
@@ -128,12 +162,15 @@ public class PaymentProcess {
     public double getGrossPay(){
         return grossPay;
     }
+
     public double getNetPay(){
         return netPay;
     }
+
     public double getSalary(){
         return salary;
     }
+
     public double getUSC(){
         return USC;
     }
@@ -142,8 +179,13 @@ public class PaymentProcess {
         return PRSI;
     }
 
+
     public double getIncomeTax(){
         return incomeTax;
+    }
+
+    public double getHealthInsurance(){
+        return  healthInsurance;
     }
 
     public LocalDate getDateOfProcess(){
