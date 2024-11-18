@@ -4,9 +4,6 @@ public class Login{
 
     private String username;
     private String password;
-    private String userType;
-    String passwordInput;
-    String usernameInput;
 
     public Login(String username, String password, String userType){
         this.username = username;

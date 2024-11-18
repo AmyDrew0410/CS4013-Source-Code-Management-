@@ -1,113 +1,136 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Logins {
 
-    Employee employee;
-    Employees employees;
-    PayslipHistory payslipHistory;
+    private Employee employee;
+    private Employees employees;
+    private PayslipHistory payslipHistory;
+    private UserTypes usertype;
+    private CSVHandler csvReader;
+    private Occupation occupation;
     //can now call methods from these classes
 
-    String userType;
-    String usernameInput;
-    String passwordInput;
+    private String username;
+    private String password;
+    private UserTypes requestingUser;
+
     //data fields
 
-    private List<Login> loginList = new ArrayList<>();
-    //arraylist of logins
+    public Logins() {
+        try {
+            csvReader = new CSVHandler("logins.csv");
+        } catch (IOException e) {
+            System.out.println("Error initializing CSV reader: " + e.getMessage());
+        }
+    }//constructor that initialises csv reader
 
-    public void addLogin(String username, String password, String userType) {
-        loginList.add(new Login(username, password, userType));
-    }//method to add login details to the list
+    public boolean authenticateLogin(String username, String password) {
+        try {
+            // Use tupleFind to search for matching username and password
+            String tuplePattern = username + "," + password;
+            String userTypeString = csvReader.tupleFind(tuplePattern, 2); // User type is the 3rd column (index 2)
 
-    public String authenticateLogin(){
-        return "Login authenticated. Welcome, " + employee.getFirst_Name() + " " + employee.getLast_Name() + ".";
-    }//authenticates login to continue
+            if (userTypeString != null) {
+                requestingUser = UserTypes.(userTypeString.toUpperCase());
+                return true;
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading CSV file: " + e.getMessage());
+        }
+        return false;
+    }// Method to authenticate login using the CSV file
 
     public String loginFailed(){
         return "Login has failed. please try again.";
     }//tells user they cannot continue
 
-    public String giveAccess(){
-        Scanner scanner = new Scanner(System.in);
-        //creates a scanner object
-
-        System.out.println("What access level would you like to give? \n Please choose one of the following: \n" +
-        "(A)dmin \n (H)R Manager\n (E)mployee");
-        //gives user options
-        String command = scanner.nextLine().toUpperCase();
-        //makes whatever they choose uppercase
-        if (command.equals("A")){
-            return "Admin";
-        }
-        else if (command.equals("H")){
-            return "HR Manager";
-        }
-        else if (command.equals("E")){
-            return "Employee";
-        }
-        scanner.close();
-        return "";
-    }
-
-    public void login() {
+    public String login() {
         Scanner scanner = new Scanner(System.in);
         //creates a scanner object
 
         System.out.println("Please enter your username: ");
         //asks user to input username
 
-        usernameInput = scanner.nextLine();
+        username = scanner.nextLine();
         //takes what user inputs as the username
 
         System.out.println("Please enter your password: ");
         //asks user to input password
 
-        passwordInput = scanner.nextLine();
+        password = scanner.nextLine();
         //takes what user inputs as the password
 
         scanner.close();
         //closes scanner to save resources
+
+        authenticateLogin(username, password);
+
+        if (authenticateLogin(username, password)) {
+            System.out.println("Welcome, " + username + "!");
+            CLI();
+        }
+        else{
+            loginFailed();
+        }
     }
 
-     for (Login login : loginList) {
-        if (login.getUsername().equals(usernameInput) && login.getPassword().equals(passwordInput)) {
-            authenticateLogin();
+    public void CLI() {
+        Scanner scanner = new Scanner(System.in);
+        //creates a scanner object
 
-            Scanner scanner = new Scanner(System.in);
-            //creates a scanner object
+        if (requestingUser instanceof Admin) {
 
             System.out.println("What would you like to do?");
-            System.out.println("(S)ee my details \n (R)eview payslip history \n (V)iew employee list");
-            if(userType == "Admin"){
-                System.out.print("(A)dd a new employee \n (D)elete an employee \n");
-            }
-            if(userType == "HR Manager"){
-                System.out.println("(P)romote an employee \n");
-            }
+            System.out.println("(A) See my details \n (B) Review payslip history \n (C) View employee list " +
+                    "\n (D) Add a new employee \n (E) Delete an employee \n");
+
             String command = scanner.nextLine().toUpperCase();
-            if(command.equals("S")){
-                employees.employeeInformation(employee.getEmployee_ID(),employee.user_Type(), String.valueOf(employee.getEmployee_ID()));
+
+            if (command.equals("A")) {
+                employees.employeeInformation(employee.employee_ID, requestingUser);
+            } else if (command.equals("B")) {
+                payslipHistory.printPayslipHistory();
+            } else if (command.equals("C")) {
+                employees.getListOfEmployees(requestingUser);
+            } else if (command.equals("D")) {
+                employees.addEmployee(requestingUser);
+            } else if (command.equals("E")) {
+                employees.removeEmployee(requestingUser);
+        }
+        else if (requestingUser instanceof HR) {
+            System.out.println("What would you like to do?");
+            System.out.println("(A) See my details \n (B) Review payslip history \n (C) View employee list " +
+                   "(D) Promote an employee \n");
+
+            String command1 = scanner.nextLine().toUpperCase();
+
+            if (command1.equals("A")) {
+                employees.employeeInformation(employee.employee_ID, requestingUser);
+            } else if (command1.equals("B")) {
+                payslipHistory.printPayslipHistory();
+            } else if (command1.equals("C")) {
+                employees.getListOfEmployees(requestingUser);
+            } else if (command1.equals("D")) {
+                occupation.ascend();
             }
-            if(command.equals("R")){
-                payslipHistory.getPayslipHistory();
+        else {
+            System.out.println("What would you like to do?");
+            System.out.println("(A) See my details \n (B) Review payslip history \n (C) View employee list ");
+
+            String command2 = scanner.nextLine().toUpperCase();
+
+            if (command2.equals("A")) {
+                employees.employeeInformation(employee.employee_ID, requestingUser);
+            } else if (command2.equals("B")) {
+                payslipHistory.printPayslipHistory();
+            } else if (command2.equals("C")) {
+                employees.getListOfEmployees(requestingUser);
             }
-            if(command.equals("V")){
-                employees.getListOfEmployees();
-            }
-            if(command.equals("A")){
-                employees.addEmployee(employee);
-            }
-            if(command.equals("D")){
-                employees.removeEmployee(employee);
-            }
-            if(command.equals("P")){
-                employee.ascend();
-            }
+        }
 
         }
-        else{loginFailed();}
+        }
     }
 
 }
