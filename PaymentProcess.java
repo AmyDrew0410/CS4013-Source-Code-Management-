@@ -32,7 +32,7 @@ public class PaymentProcess {
         this.healthInsurance = calcHealthInsurance();
         this.unionFees = calcUnionFees();
         this.dateOfProcess = dateOfProcess;
-        this.netPay = calcNetPay(PRSI, USC, incomeTax, healthInsurance);
+        this.netPay = calcNetPay(PRSI, USC, incomeTax, healthInsurance, unionFees);
     }
 
     /**
