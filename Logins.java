@@ -25,27 +25,7 @@ public class Logins {
         }
     }//constructor that initialises csv reader
 
-    public boolean authenticateLogin(String username, String password) {
-        try {
-            // Use tupleFind to search for matching username and password
-            String tuplePattern = username + "," + password;
-            String userTypeString = csvReader.tupleFind(tuplePattern, 2); // User type is the 3rd column (index 2)
-
-            if (userTypeString != null) {
-                requestingUser = UserTypes.(userTypeString.toUpperCase());
-                return true;
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading CSV file: " + e.getMessage());
-        }
-        return false;
-    }// Method to authenticate login using the CSV file
-
-    public String loginFailed(){
-        return "Login has failed. please try again.";
-    }//tells user they cannot continue
-
-    public String login() {
+    public void login() {
         Scanner scanner = new Scanner(System.in);
         //creates a scanner object
 
@@ -75,6 +55,26 @@ public class Logins {
         }
     }
 
+    public boolean authenticateLogin(String username, String password) {
+        try {
+            // Use tupleFind to search for matching username and password
+            String tuplePattern = username + "," + password;
+            String userTypeString = csvReader.tupleFind(tuplePattern, 2); // User type is the 3rd column (index 2)
+
+            if (userTypeString != null) {
+                requestingUser = UserTypes.(userTypeString.toUpperCase());
+                return true;
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading CSV file: " + e.getMessage());
+        }
+        return false;
+    }// Method to authenticate login using the CSV file
+
+    public String loginFailed(){
+        return "Login has failed. please try again.";
+    }//tells user they cannot continue
+
     public void CLI() {
         Scanner scanner = new Scanner(System.in);
         //creates a scanner object
@@ -87,45 +87,41 @@ public class Logins {
 
             String command = scanner.nextLine().toUpperCase();
 
-            if (command.equals("A")) {
-                employees.employeeInformation(employee.employee_ID, requestingUser);
-            } else if (command.equals("B")) {
-                payslipHistory.printPayslipHistory();
-            } else if (command.equals("C")) {
-                employees.getListOfEmployees(requestingUser);
-            } else if (command.equals("D")) {
-                employees.addEmployee(requestingUser);
-            } else if (command.equals("E")) {
-                employees.removeEmployee(requestingUser);
+            switch (command) {
+                case "A" -> employees.employeeInformation(employee.employee_ID, requestingUser);
+                case "B" -> payslipHistory.printPayslipHistory();
+                case "C" -> employees.getListOfEmployees(requestingUser);
+                case "D" -> employees.addEmployee(requestingUser);
+                case "E" -> employees.removeEmployee(requestingUser);
+                default -> System.out.println("Invalid command.");
+            }
         }
         else if (requestingUser instanceof HR) {
             System.out.println("What would you like to do?");
             System.out.println("(A) See my details \n (B) Review payslip history \n (C) View employee list " +
-                   "(D) Promote an employee \n");
+                    "(D) Promote an employee \n");
 
-            String command1 = scanner.nextLine().toUpperCase();
+            String command = scanner.nextLine().toUpperCase();
 
-            if (command1.equals("A")) {
-                employees.employeeInformation(employee.employee_ID, requestingUser);
-            } else if (command1.equals("B")) {
-                payslipHistory.printPayslipHistory();
-            } else if (command1.equals("C")) {
-                employees.getListOfEmployees(requestingUser);
-            } else if (command1.equals("D")) {
-                occupation.ascend();
+            switch (command) {
+                case "A" -> employees.employeeInformation(employee.employee_ID, requestingUser);
+                case "B" -> payslipHistory.printPayslipHistory();
+                case "C" -> employees.getListOfEmployees(requestingUser);
+                case "D" -> occupation.ascend();
+                default -> System.out.println("Invalid command.");
             }
+        }
         else {
             System.out.println("What would you like to do?");
             System.out.println("(A) See my details \n (B) Review payslip history \n (C) View employee list ");
 
-            String command2 = scanner.nextLine().toUpperCase();
+            String command = scanner.nextLine().toUpperCase();
 
-            if (command2.equals("A")) {
-                employees.employeeInformation(employee.employee_ID, requestingUser);
-            } else if (command2.equals("B")) {
-                payslipHistory.printPayslipHistory();
-            } else if (command2.equals("C")) {
-                employees.getListOfEmployees(requestingUser);
+            switch (command) {
+                case "A" -> employees.employeeInformation(employee.employee_ID, requestingUser);
+                case "B" -> payslipHistory.printPayslipHistory();
+                case "C" -> employees.getListOfEmployees(requestingUser);
+                default -> System.out.println("Invalid command.");
             }
         }
 
