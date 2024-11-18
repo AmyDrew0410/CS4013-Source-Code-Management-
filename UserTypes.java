@@ -8,9 +8,10 @@ public abstract class UserTypes {
     protected String PPSN;
     protected Occupation occupation;
     protected String userType;
+    protected String unionFees;
 
     //Constructor
-    public UserTypes(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, Boolean marital_Status, Employees employees, String PPSN, String userType){
+    public UserTypes(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, Boolean marital_Status, Employees employees, String PPSN, String userType, String unionFees){
         this.first_Name = first_Name;
         this.last_Name = last_Name;
         this.employee_ID = employee_ID;
@@ -22,9 +23,10 @@ public abstract class UserTypes {
         OccupationMenu menu = new OccupationMenu();
         occupation = menu.run();
         this.userType = userType;
+        this.unionFees = unionFees;
     }
 
-    public UserTypes(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, Boolean marital_Status, String PPSN, String userType){
+    public UserTypes(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, Boolean marital_Status, String PPSN, String userType, String unionFees){
         this.first_Name = first_Name;
         this.last_Name = last_Name;
         this.employee_ID = employee_ID;
@@ -35,6 +37,7 @@ public abstract class UserTypes {
         OccupationMenu menu = new OccupationMenu();
         occupation = menu.run();
         this.userType = userType;
+        this.unionFees = unionFees;
     }
 
     // Getter methods
@@ -68,6 +71,10 @@ public abstract class UserTypes {
 
     public String getUserType(){
         return userType;
+    }
+
+    public String getUnionFees(){
+        return unionFees;
     }
 
     public abstract boolean AccessEmployeeList();
