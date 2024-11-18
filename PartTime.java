@@ -8,24 +8,12 @@ public class PartTime extends Employee{
     private double hours_Per_Week;
     private boolean formFilledOut;
     
-    /*public PartTime(String first_Name, String last_Name,int employee_ID, String phone_Number, String email, int current_Points, boolean marital_Status, Employees employee, String PPSN, double hours_Per_Week, Scanner scanner){
-        super(first_Name, last_Name, partTimeList.size() + 1, phone_Number, email, 0, false, employee, PPSN);
+    public PartTime(String first_Name, String last_Name,int employee_ID, String phone_Number, String email, boolean marital_Status, Employees employee, String PPSN, double hours_Per_Week, Scanner scanner){
+        super(first_Name, last_Name, partTimeList.size() + 1, phone_Number, email, false, employee, PPSN);
         this.hours_Per_Week = hours_Per_Week;
         this.formFilledOut = validateFormFilled(scanner);
         partTimeList.add(this);
 
-    }*/
-
-    public PartTime(String first_Name, String last_Name, int employee_ID, String phone_Number, String email, int current_Points, boolean marital_Status, Employees employee, String PPSN, double hours_Per_Week, Scanner scanner) {
-        super(first_Name, last_Name, employee_ID, phone_Number, email, current_Points, marital_Status, employee, PPSN);
-        this.hours_Per_Week = hours_Per_Week;
-        this.formFilledOut = validateFormFilled(scanner);
-        partTimeList.add(this);
-    }
-
-// Overloaded constructor with default maritalStatus (set to false) and default currentPoints (set to 0)
-    public PartTime(String first_Name, String last_Name, String phone_Number, String email, String PPSN, double hours_Per_Week, Employees employee, Scanner scanner) {
-        this(first_Name, last_Name, partTimeList.size() + 1, phone_Number, email, 0, false, employee, PPSN, hours_Per_Week, scanner);
     }
 
 

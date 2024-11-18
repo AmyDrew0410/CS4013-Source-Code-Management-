@@ -31,7 +31,7 @@ public class TestUserTypes {
         System.out.println(getInfo);
         */
 
-        for (UserTypes user : employees.getListOfEmployees(adminUser))
+        for (UserTypes user : PartTime.getPartTimeList(adminUser))
         System.out.println(user.toString());
     }
 }

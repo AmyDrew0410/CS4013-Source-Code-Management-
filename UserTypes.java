@@ -4,21 +4,37 @@ public abstract class UserTypes {
     protected int employee_ID;
     protected String email;
     protected String phone_Number;
-    protected int current_Points;
     protected Boolean marital_Status;
     protected String PPSN;
+    protected Occupation occupation;
+    protected String userType;
 
     //Constructor
-    public UserTypes(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, int current_Points, Boolean marital_Status, Employees employees, String PPSN){
+    public UserTypes(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, Boolean marital_Status, Employees employees, String PPSN, String userType){
         this.first_Name = first_Name;
         this.last_Name = last_Name;
         this.employee_ID = employee_ID;
         this.email = email;
         this.phone_Number = phone_Number;
-        this.current_Points = current_Points;
         this.marital_Status = marital_Status;
         this.PPSN = PPSN;
         employees.addEmployee(this); // adds employee to the ListOfEmployees
+        OccupationMenu menu = new OccupationMenu();
+        occupation = menu.run();
+        this.userType = userType;
+    }
+
+    public UserTypes(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, Boolean marital_Status, String PPSN, String userType){
+        this.first_Name = first_Name;
+        this.last_Name = last_Name;
+        this.employee_ID = employee_ID;
+        this.email = email;
+        this.phone_Number = phone_Number;
+        this.marital_Status = marital_Status;
+        this.PPSN = PPSN;
+        OccupationMenu menu = new OccupationMenu();
+        occupation = menu.run();
+        this.userType = userType;
     }
 
     // Getter methods
@@ -46,12 +62,12 @@ public abstract class UserTypes {
         return phone_Number;
     }
 
-    public int getCurrent_Points(){
-        return current_Points;
-    }
-
     public String getPPSN(){
         return PPSN;
+    }
+
+    public String getUserType(){
+        return userType;
     }
 
     public abstract boolean AccessEmployeeList();
@@ -65,6 +81,7 @@ public abstract class UserTypes {
                "Employee ID: " + employee_ID + "\n" +
                "Email: " + email + "\n" +
                "Phone number: " + phone_Number + "\n" +
-               "Current points: " + current_Points + "\n";
+               "Current points: " + "\n" +
+                occupation.toString();
     }
 }
