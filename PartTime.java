@@ -12,13 +12,13 @@ public class PartTime extends Employee{
         employees.addEmployee(this); // adds employee to the ListOfEmployees
     }
 
-    /*public PartTime(String first_Name, String last_Name, int employee_ID, String phone_Number, String email, boolean marital_Status, String PPSN, double hours_Per_Week, String unionFees){
-        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, PPSN, unionFees);
+    public PartTime(String first_Name, String last_Name,int employee_ID, String phone_Number, String email, boolean marital_Status, Employees employees, String PPSN, String UserType, double hours_Per_Week, Scanner scanner, String unionFees){
+        super(first_Name, last_Name, 101, phone_Number, email, false, PPSN, unionFees);
         this.hours_Per_Week = hours_Per_Week;
         this.formFilledOut = validateFormFilled(scanner);
+        UserType = "PartTime";
         employees.addEmployee(this); // adds employee to the ListOfEmployees
-    }*/
-
+    }
 
     public boolean validateFormFilled(Scanner scanner){
         //Scanner scanner = new Scanner(System.in);
