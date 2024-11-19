@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Employees{
     // List of employees
-    protected List<UserTypes> listOfEmployees = new ArrayList<>();
+    private List<UserTypes> listOfEmployees = new ArrayList<>();
 
     // Method adds employee to the list, is called in the Employee class
     public void addEmployee(UserTypes employee){
