@@ -3,16 +3,14 @@ import java.util.List;
 
 public class Employees{
     // List of employees
-    private List<UserTypes> listOfEmployees = new ArrayList<>();
+    protected List<UserTypes> listOfEmployees = new ArrayList<>();
 
     // Method adds employee to the list, is called in the Employee class
     public void addEmployee(UserTypes employee){
         if(listOfEmployees.contains(employee)){
             System.out.println("Employee already exists.");
         }else{
-            if(!(employee instanceof PartTime)){
                 listOfEmployees.add(employee);
-            }
         }
     }
 

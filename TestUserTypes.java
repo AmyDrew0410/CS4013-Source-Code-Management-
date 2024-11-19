@@ -14,7 +14,7 @@ public class TestUserTypes {
         Employee regularEmployee = new Employee("Carol", "Davis", 3, "carol@company.com", "123-456-7892", 50, true, employees,"114466");
         PartTime partTimeEmployee = new PartTime("Jack", "Ryan", "085-174-1927", "jack@company.com", "556677", 20, employees, scanner);
 
-        /* 
+        /*
         for (UserTypes user : employees.getListOfEmployees(adminUser))
         System.out.println(user.toString());
 
@@ -30,8 +30,5 @@ public class TestUserTypes {
 
         System.out.println(getInfo);
         */
-
-        for (UserTypes user : PartTime.getPartTimeList(adminUser))
-        System.out.println(user.toString());
     }
 }

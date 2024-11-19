@@ -88,7 +88,6 @@ public abstract class UserTypes {
                "Employee ID: " + employee_ID + "\n" +
                "Email: " + email + "\n" +
                "Phone number: " + phone_Number + "\n" +
-               "Current points: " + "\n" +
                 occupation.toString();
     }
 }
