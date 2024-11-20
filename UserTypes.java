@@ -1,3 +1,9 @@
+package UserType;
+
+import Occupations.Occupation;
+import Occupations.OccupationMenu;
+
+
 public abstract class UserTypes {
     protected String first_Name;
     protected String last_Name;
@@ -6,7 +12,7 @@ public abstract class UserTypes {
     protected String phone_Number;
     protected Boolean marital_Status;
     protected String PPSN;
-    protected Occupation occupation;
+    public Occupation occupation;
     protected String userType;
     protected String unionFees;
 
@@ -79,15 +85,21 @@ public abstract class UserTypes {
 
     public abstract boolean AccessEmployeeList();
 
-    
-
     @Override
     public String toString(){
         return "First name: " + first_Name + "\n" +
                "Last name: " + last_Name + "\n" +
-               "Employee ID: " + employee_ID + "\n" +
+               "UserType.Employee ID: " + employee_ID + "\n" +
                "Email: " + email + "\n" +
                "Phone number: " + phone_Number + "\n" +
                 occupation.toString();
+    }
+
+    public String toCSV(){
+        return String.format("%s, %s, %d, %s, %s, %b, %s, %s, %s, %s" , first_Name, last_Name, employee_ID, email, phone_Number, marital_Status, PPSN, occupation.toCSV(), userType, unionFees);
+    }
+
+    public Object getSalary() {
+        return occupation.getSalary();
     }
 }

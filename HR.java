@@ -1,11 +1,13 @@
-public class HR extends UserTypes{
+package UserType;
 
-    public HR(String first_Name, String last_Name, int employee_ID, String phone_Number,  String email, Boolean marital_Status, Employees employees, String PPSN, String unionFees){
-        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, employees, PPSN, "HR", unionFees);
+public class HR extends UserTypes {
+
+    public HR(String first_Name, String last_Name, int employee_ID, String phone_Number, String email, Boolean marital_Status, Employees employees, String PPSN, String unionFees){
+        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, employees, PPSN, "UserType.HR", unionFees);
     }
 
     public HR(String first_Name, String last_Name, int employee_ID, String phone_Number,  String email, Boolean marital_Status, String PPSN, String unionFees){
-        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, PPSN, "HR", unionFees);
+        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, PPSN, "UserType.HR", unionFees);
     }
 
     public String getFirst_Name(){

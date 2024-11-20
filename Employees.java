@@ -1,14 +1,22 @@
+package UserType;
+
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
+import CSVHandler.CSVWriter;
 
 public class Employees{
     // List of employees
-    private List<UserTypes> listOfEmployees = new ArrayList<>();
+    private ArrayList<UserTypes> listOfEmployees = new ArrayList<>();
 
-    // Method adds employee to the list, is called in the Employee class
+    public Employees(ArrayList<UserTypes> users){
+        this.listOfEmployees = users;
+    }
+
+    // Method adds employee to the list, is called in the UserType.Employee class
     public void addEmployee(UserTypes employee){
         if(listOfEmployees.contains(employee)){
-            System.out.println("Employee already exists.");
+            System.out.println("UserType.Employee already exists.");
         }else{
                 listOfEmployees.add(employee);
         }
@@ -19,7 +27,7 @@ public class Employees{
     }
 
     // Checks what type of user you are in order to give you access to the list of employees
-    public List<UserTypes> getListOfEmployees(UserTypes users){
+    public ArrayList<UserTypes> getListOfEmployees(UserTypes users){
         if(users instanceof Admin){
         return listOfEmployees;
         }
@@ -46,8 +54,21 @@ public class Employees{
                 }
             }
         }
-        System.out.println("Employee not found.");
+        System.out.println("UserType.Employee not found.");
         return null;
+    }
+
+    public void writeToEmployeeData(String fileName) throws IOException{
+        ArrayList<String> write = new ArrayList<String>();
+        CSVWriter CSvWriter = new CSVWriter("src/UserType/EmployeeData/" , fileName);
+
+        for(UserTypes user : listOfEmployees){
+            
+            String currentUser = user.toCSV();
+            write.add(currentUser);
+        }
+
+        CSvWriter.writeToCSV(write);
     }
 
 }

@@ -1,11 +1,13 @@
+package UserType;
+
 public class Employee extends UserTypes{
     
     public Employee(String first_Name, String last_Name, int employee_ID, String phone_Number,  String email, Boolean marital_Status, Employees employees, String PPSN, String unionFees){
-        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, employees, PPSN, "Employee", unionFees);
+        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, employees, PPSN, "UserType.Employee", unionFees);
     }
 
     public Employee(String first_Name, String last_Name, int employee_ID, String phone_Number,  String email, Boolean marital_Status, String PPSN, String unionFees){
-        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, PPSN, "Employee", unionFees);
+        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, PPSN, "UserType.Employee", unionFees);
     }
 
 
@@ -36,6 +38,7 @@ public class Employee extends UserTypes{
     public String getPPSN(){
         return PPSN;
     }
+
 
     @Override
     public boolean AccessEmployeeList(){

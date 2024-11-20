@@ -1,3 +1,5 @@
+package UserType;
+
 import java.util.Scanner;
 
 public class PartTime extends Employee{
@@ -5,25 +7,25 @@ public class PartTime extends Employee{
     private double hours_Per_Week;
     private boolean formFilledOut;
     
-    public PartTime(String first_Name, String last_Name,int employee_ID, String phone_Number, String email, boolean marital_Status, Employees employees, String PPSN, double hours_Per_Week, Scanner scanner, String unionFees){
+    public PartTime(String first_Name, String last_Name,int employee_ID, String phone_Number, String email, boolean marital_Status, Employees employees, String PPSN, double hours_Per_Week, String unionFees){
         super(first_Name, last_Name, 101, phone_Number, email, false, PPSN, unionFees);
         this.hours_Per_Week = hours_Per_Week;
-        this.formFilledOut = validateFormFilled(scanner);
+        this.formFilledOut = validateFormFilled();
         employees.addEmployee(this); // adds employee to the ListOfEmployees
     }
 
-    public PartTime(String first_Name, String last_Name,int employee_ID, String phone_Number, String email, boolean marital_Status, Employees employees, String PPSN, String UserType, double hours_Per_Week, Scanner scanner, String unionFees){
-        super(first_Name, last_Name, 101, phone_Number, email, false, PPSN, unionFees);
+    public PartTime(String first_Name, String last_Name, int employee_ID, String phone_Number, String email, boolean marital_Status, String PPSN, double hours_Per_Week, String unionFees){
+        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, PPSN, unionFees);
         this.hours_Per_Week = hours_Per_Week;
-        this.formFilledOut = validateFormFilled(scanner);
-        UserType = "PartTime";
-        employees.addEmployee(this); // adds employee to the ListOfEmployees
+        this.formFilledOut = validateFormFilled();
     }
 
-    public boolean validateFormFilled(Scanner scanner){
-        //Scanner scanner = new Scanner(System.in);
+
+    public boolean validateFormFilled(){
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Have you filled out the Part-time payment form? (y) / (n) ");
         String input = scanner.nextLine();
+        scanner.close();
 
         if(input.equalsIgnoreCase("y")){
             System.out.println("Form filled out.");
