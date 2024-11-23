@@ -1,3 +1,7 @@
+package PaymentProcess;
+
+import UserType.UserTypes;
+
 import java.time.LocalDate;
 
 public class PaymentProcess {
@@ -184,9 +188,14 @@ public class PaymentProcess {
         return incomeTax;
     }
 
-    public double getHealthInsurance(){
-        return  healthInsurance;
+     public double getHealthInsurance(){
+        return healthInsurance;
     }
+
+    public double getUnionFees(){
+        return unionFees;
+    }
+
 
     public LocalDate getDateOfProcess(){
         return dateOfProcess;
