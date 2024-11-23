@@ -1,7 +1,7 @@
 package PaymentProcess;
 
 import UserType.UserTypes;
-import CSVHandler.*;
+import FileHandler.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -106,7 +106,7 @@ public class Payslip {
         csvWriter.writeToCSV(payslipHistory);
     }
 
-    public void getPayslipData(){
+    public void getPayslipData() throws FileNotFoundException {
         //folder to hold the directory to the folder holding csv files
         String folder = "src\\PaymentProcess\\PayslipHistory";
         FolderReader reader = new FolderReader(folder);
@@ -137,7 +137,7 @@ public class Payslip {
             payslipString.append("======= PAYMENT AND DEDUCTIONS ======== \n\n");
 
             payslipString.append("GROSS PAY: ").append(format("%.2f", Double.parseDouble(data[5]))).append("\n");
-            payslipString.append("PRSI: ").append(format("%.2f", Double.parseDouble(data[6]))).append("\n"));
+            payslipString.append("PRSI: ").append(format("%.2f", Double.parseDouble(data[6]))).append("\n");
             payslipString.append("USC: ").append(format("%.2f", Double.parseDouble(data[7]))).append("\n");
             payslipString.append("INCOME TAX: ").append(format("%.2f", Double.parseDouble(data[8]))).append("\n");
             payslipString.append("HEALTH INSURANCE: ").append(format("%.2f", Double.parseDouble(data[9]))).append("\n");
