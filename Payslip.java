@@ -93,7 +93,7 @@ public class Payslip {
      * @throws FileNotFoundException
      */
 
-    public void payslipToCSV(PaymentProcess payslip,String fileName) throws IOException{
+    public void payslipToCSV(PaymentProcess payslip, String fileName) throws IOException{
         //Make a CSVHandler object for handling writing the payslip to CSV.
         CSVWriter csvWriter = new CSVWriter("src\\PaymentProcess\\PayslipHistory\\" ,fileName + ".csv");
 
@@ -114,14 +114,14 @@ public class Payslip {
         ArrayList<String> payslipHistoryNames = reader.getFileNames();
         String userChoice = retrieveUserChoice(payslipHistoryNames);
 
-        //instatiate a csv reader object to read the directory and the choice the user makes
-        CSVReader CSVReader = new CSVReader(folder + userChoice);
+        //instantiate a csv reader object to read the directory and the choice the user makes
+        CSVReader csvReader = new CSVReader(folder + userChoice);
         //reads the data in the csv file the user chooses
-        String payslipData = CSVReader.tupleFind(getUsername());
+        String payslipData = csvReader.tupleFind(getUsername());
 
         //conditional statements for if user is or is not found.
         if(payslipData != null){
-            String[] data = payslipData.split(", ");
+            String[] data = payslipData.split(",");
 
             //string builder to print the payslip from the csv file as a structured string
             StringBuilder payslipString = new StringBuilder();

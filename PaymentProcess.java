@@ -3,6 +3,7 @@ package PaymentProcess;
 import UserType.UserTypes;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class PaymentProcess {
     private double grossPay;
@@ -15,8 +16,8 @@ public class PaymentProcess {
     private double unionFees;
     private double maxTaxCredit;
     private LocalDate dateOfProcess;
-
-    UserTypes employee;
+    private String maritalStatus;
+    private String unionType;
 
     /**
      * this class is to run through multiple methods to calculate the net pay once
@@ -26,16 +27,17 @@ public class PaymentProcess {
      */
 
     //payment process constructor to create obj in generate payslips class
-    public PaymentProcess(double salary, LocalDate dateOfProcess, UserTypes employee){
+    public PaymentProcess(double salary, LocalDate dateOfProcess, String maritalStatus, String unionType){
         this.salary = salary;
-        this.employee = employee;
         this.grossPay = calcGrossPay();
         this.PRSI = calcPRSI();
         this.USC = calcUSC();
         this.incomeTax = calcIncomeTax();
         this.healthInsurance = calcHealthInsurance();
+        this.unionType = unionType;
         this.unionFees = calcUnionFees();
         this.dateOfProcess = dateOfProcess;
+        this.maritalStatus = maritalStatus;
         this.netPay = calcNetPay(PRSI, USC, incomeTax, healthInsurance, unionFees);
     }
 
@@ -104,7 +106,7 @@ public class PaymentProcess {
      */
 
     public double calcIncomeTax(){
-        boolean maritalStatus = employee.getMarital_Status();
+        boolean maritalStatus = this.maritalStatus.contains("true");
         double totalIncomeTax;
         if(maritalStatus && salary >= 80000) {
             totalIncomeTax = 80000 * 0.2;
@@ -140,7 +142,7 @@ public class PaymentProcess {
 
     public double calcUnionFees(){
         double unionFeesDeducted;
-        if(employee.getUnionFees() == "A"){
+        if(unionType.equals("A")){
             unionFeesDeducted = salary * 0.005;
         }else{
             unionFeesDeducted = salary * 0.01;
@@ -183,19 +185,17 @@ public class PaymentProcess {
         return PRSI;
     }
 
-
     public double getIncomeTax(){
         return incomeTax;
     }
 
-     public double getHealthInsurance(){
+    public double getHealthInsurance(){
         return healthInsurance;
     }
 
     public double getUnionFees(){
         return unionFees;
     }
-
 
     public LocalDate getDateOfProcess(){
         return dateOfProcess;
