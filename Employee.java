@@ -39,6 +39,10 @@ public class Employee extends UserTypes{
         return PPSN;
     }
 
+    public String getUserType(){
+        return userType;
+    }
+
 
     @Override
     public boolean AccessEmployeeList(){
@@ -48,5 +52,11 @@ public class Employee extends UserTypes{
     @Override
     public String toString(){
         return super.toString();
+    }
+
+    @Override
+    public void addEmployee() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addEmployee'");
     }
 }

@@ -7,10 +7,11 @@ public class PartTime extends Employee{
     private double hours_Per_Week;
     private boolean formFilledOut;
     
-    public PartTime(String first_Name, String last_Name,int employee_ID, String phone_Number, String email, boolean marital_Status, Employees employees, String PPSN, double hours_Per_Week, String unionFees){
+    public PartTime(String first_Name, String last_Name,int employee_ID, String phone_Number, String email, boolean marital_Status, Employees employees, String PPSN, String userType, double hours_Per_Week, String unionFees){
         super(first_Name, last_Name, 101, phone_Number, email, false, PPSN, unionFees);
         this.hours_Per_Week = hours_Per_Week;
         this.formFilledOut = validateFormFilled();
+        this.userType = "Part Time";
         employees.addEmployee(this); // adds employee to the ListOfEmployees
     }
 

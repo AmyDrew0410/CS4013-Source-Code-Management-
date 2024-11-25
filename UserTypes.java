@@ -25,11 +25,11 @@ public abstract class UserTypes {
         this.phone_Number = phone_Number;
         this.marital_Status = marital_Status;
         this.PPSN = PPSN;
-        employees.addEmployee(this); // adds employee to the ListOfEmployees
         OccupationMenu menu = new OccupationMenu();
         occupation = menu.run();
         this.userType = userType;
         this.unionFees = unionFees;
+        employees.addEmployee(this); // adds employee to the ListOfEmployees
     }
 
     public UserTypes(String first_Name, String last_Name, int employee_ID, String email, String phone_Number, Boolean marital_Status, String PPSN, String userType, String unionFees){
@@ -84,6 +84,8 @@ public abstract class UserTypes {
     }
 
     public abstract boolean AccessEmployeeList();
+
+    public abstract void addEmployee();
 
     @Override
     public String toString(){

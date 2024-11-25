@@ -1,6 +1,6 @@
 package UserType;
 
-public class HR extends UserTypes {
+public class HR extends UserTypes implements EmployeeHandler{
 
     public HR(String first_Name, String last_Name, int employee_ID, String phone_Number, String email, Boolean marital_Status, Employees employees, String PPSN, String unionFees){
         super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, employees, PPSN, "UserType.HR", unionFees);
@@ -42,9 +42,27 @@ public class HR extends UserTypes {
     public boolean AccessEmployeeList(){
         return true;
     }
+
+    public void addEmployee(UserTypes employee, Employees listOfEmployees){
+        if(listOfEmployees.equals(employee)){
+            System.out.println("UserType.Employee already exists.");
+        }else{
+                listOfEmployees.add(employee);
+        }
+    }
+
+    public void removeEmployee(UserTypes employee, Employees listOfEmployees){
+        listOfEmployees.remove(employee);
+    }
     
     @Override
     public String toString(){
         return super.toString();
+    }
+
+    @Override
+    public void addEmployee() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addEmployee'");
     }
 }
