@@ -1,3 +1,12 @@
+package Login;
+
+import Occupations.OccupationMenu;
+import UserType.Employee;
+import UserType.Employees;
+import PaymentProcess.PayslipHistory;
+import UserType.UserTypes;
+
+
 import java.util.Scanner;
 
 public class CLI {
@@ -7,6 +16,7 @@ public class CLI {
     private String requestingUser; // Store the user type (Admin, HR, Employee)
     private Logins logins;
     private UserTypes userType;
+    private OccupationMenu menu;
     //can now call methods from these classes
 
     private String username;
@@ -29,7 +39,7 @@ public class CLI {
             System.out.println("Welcome, " + username + "!");
             CLI();
         } else {
-            System.out.println(logins.loginFailed());
+            logins.loginFailed();
         }
     }
 
@@ -47,7 +57,7 @@ public class CLI {
 
             // Handle commands for Admin
             if (command.equals("A")) {
-                employees.employeeInformation(employee.employee_ID, userType);
+                employees.employeeInformation(employee.getEmployee_ID(), userType);
             } else if (command.equals("B")) {
                 payslipHistory.printPayslipHistory();
             } else if (command.equals("C")) {
@@ -66,13 +76,13 @@ public class CLI {
             String command = scanner.nextLine().toUpperCase();
 
             if (command.equals("A")) {
-                employees.employeeInformation(employee.employee_ID, userType);
+                employees.employeeInformation(employee.getEmployee_ID(), userType);
             } else if (command.equals("B")) {
                 payslipHistory.printPayslipHistory();
             } else if (command.equals("C")) {
                 employees.getListOfEmployees(userType);
             } else if (command.equals("D")) {
-                occupation.ascend();
+                menu.ascend(employee.getOccupation());
             }
         } else if (requestingUser.equals("Employee")) {
             // Handle commands for Employee
@@ -82,7 +92,7 @@ public class CLI {
             String command = scanner.nextLine().toUpperCase();
 
             if (command.equals("A")) {
-                employees.employeeInformation(employee.employee_ID, userType);
+                employees.employeeInformation(employee.getEmployee_ID(), userType);
             } else if (command.equals("B")) {
                 payslipHistory.printPayslipHistory();
             } else if (command.equals("C")) {
