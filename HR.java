@@ -53,6 +53,7 @@ public class HR extends UserTypes implements EmployeeHandler{
 
     public void removeEmployee(UserTypes employee, Employees listOfEmployees){
         listOfEmployees.remove(employee);
+        OverWriteData(listOfEmployees);
     }
     
     @Override

@@ -56,7 +56,9 @@ public class Admin extends UserTypes implements EmployeeHandler{
     @Override
     public void removeEmployee(UserTypes employee, Employees listOfEmployees){
         listOfEmployees.remove(employee);
+        OverWriteData(listOfEmployees);
     }
+
 
     @Override
     public String toString(){
