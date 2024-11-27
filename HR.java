@@ -1,6 +1,6 @@
 package UserType;
 
-public class HR extends UserTypes implements EmployeeHandler{
+public class HR extends UserTypes{
 
     public HR(String first_Name, String last_Name, int employee_ID, String phone_Number, String email, Boolean marital_Status, Employees employees, String PPSN, String unionFees){
         super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, employees, PPSN, "UserType.HR", unionFees);
@@ -8,6 +8,10 @@ public class HR extends UserTypes implements EmployeeHandler{
 
     public HR(String first_Name, String last_Name, int employee_ID, String phone_Number,  String email, Boolean marital_Status, String PPSN, String unionFees){
         super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, PPSN, "UserType.HR", unionFees);
+    }
+
+    public HR(String data){
+        super(data);
     }
 
     public String getFirst_Name(){
@@ -53,7 +57,7 @@ public class HR extends UserTypes implements EmployeeHandler{
 
     public void removeEmployee(UserTypes employee, Employees listOfEmployees){
         listOfEmployees.remove(employee);
-        OverWriteData(listOfEmployees);
+
     }
     
     @Override
@@ -61,9 +65,4 @@ public class HR extends UserTypes implements EmployeeHandler{
         return super.toString();
     }
 
-    @Override
-    public void addEmployee() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addEmployee'");
-    }
 }

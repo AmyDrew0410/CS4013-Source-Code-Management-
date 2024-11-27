@@ -2,15 +2,19 @@ package UserType;
 
 public class Employee extends UserTypes{
     
-    public Employee(String first_Name, String last_Name, int employee_ID, String phone_Number,  String email, Boolean marital_Status, Employees employees, String PPSN, String unionFees){
-        super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, employees, PPSN, "UserType.Employee", unionFees);
+    public Employee(String firstName, String last_Name, int employee_ID, String phone_Number, String email, Boolean marital_Status, Employees employees, String PPSN, String unionFees){
+        super(firstName, last_Name, employee_ID, phone_Number, email, marital_Status, employees, PPSN, "UserType.Employee", unionFees);
     }
 
     public Employee(String first_Name, String last_Name, int employee_ID, String phone_Number,  String email, Boolean marital_Status, String PPSN, String unionFees){
         super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, PPSN, "UserType.Employee", unionFees);
     }
 
+    public Employee(String data){
+        super(data);
+    }
 
+    @Override
     public String getFirst_Name(){
         return first_Name;
     }
@@ -39,10 +43,6 @@ public class Employee extends UserTypes{
         return PPSN;
     }
 
-    public String getUserType(){
-        return userType;
-    }
-
 
     @Override
     public boolean AccessEmployeeList(){
@@ -50,13 +50,12 @@ public class Employee extends UserTypes{
     }
 
     @Override
-    public String toString(){
-        return super.toString();
+    public void addEmployee() {
+
     }
 
     @Override
-    public void addEmployee() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addEmployee'");
+    public String toString(){
+        return super.toString();
     }
 }

@@ -1,6 +1,13 @@
 package UserType;
 
-public class Admin extends UserTypes implements EmployeeHandler{
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+
+import FileHandler.CSVWriter;
+
+public class Admin extends UserTypes{
 
     
     public Admin(String first_Name, String last_Name, int employee_ID, String phone_Number, String email, Boolean marital_Status, Employees employees, String PPSN, String unionFees){
@@ -9,6 +16,10 @@ public class Admin extends UserTypes implements EmployeeHandler{
 
     public Admin(String first_Name, String last_Name, int employee_ID, String phone_Number,  String email, Boolean marital_Status, String PPSN, String unionFees){
         super(first_Name, last_Name, employee_ID, phone_Number, email, marital_Status, PPSN, "UserType.Admin", unionFees);
+    }
+
+    public Admin(String data){
+        super(data);
     }
 
     public String getFirst_Name(){
@@ -55,8 +66,26 @@ public class Admin extends UserTypes implements EmployeeHandler{
 
     @Override
     public void removeEmployee(UserTypes employee, Employees listOfEmployees){
+        // Remove the specified employee From the list
         listOfEmployees.remove(employee);
-        OverWriteData(listOfEmployees);
+        try
+        {
+            CSVWriter writer = new CSVWriter("src/UserType/resources/employees.csv");
+            ArrayList<UserTypes> empData = listOfEmployees.getListOfEmployees();
+            ArrayList<String> toWrite = new ArrayList<>();
+            for(UserTypes emp : empData)
+            {
+                toWrite.add(emp.toCSV());
+            }
+        }catch(IOException | InputMismatchException e)
+        {
+            if(e instanceof FileNotFoundException){
+                System.err.println("The file Could Not be found! ");
+            }else{
+                System.err.println("The employee ID doesn't exist in this file");
+            }
+        }
+
     }
 
 
@@ -65,10 +94,5 @@ public class Admin extends UserTypes implements EmployeeHandler{
         return super.toString();
     }
 
-    @Override
-    public void addEmployee() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addEmployee'");
-    }
 
 }
