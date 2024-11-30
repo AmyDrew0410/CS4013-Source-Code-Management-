@@ -1,60 +1,62 @@
-import java.io.FileNotFoundException;
+package Occupations;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import FileHandler.*;
 
 /**
  * Handles initialising an occupation object each time one is instantiated in our system
  * @author Ben Bastianelli StudentI.D. 23368071
  * @Version : 1.0
  */
-public class OccupationMenu {
-    private Scanner in;
-
+public class OccupationMenu implements FormatManager
+{
+    private final Scanner in; // Generic scanner for the class
     public OccupationMenu(){
         in = new Scanner(System.in);
-    }
+    } // Instantiates our scanner to read User input
 
+    /**
+     * A run method that gets the department of the new employees desired occupation and initialises an Occupation variable
+     * Based off of further User input
+     * @return Occupation object
+     */
     public Occupation run(){
-        //Ask the HR officer what department they wish to add the employee to
+        //Ask the UserType.HR officer what department they wish to add the employee to
         System.out.println("What department is the employee being allocated to:");
 
         //Implement method to list all department options and returns user choice as string
-        CSVHandler departments = null;
-        try {
-            departments = new CSVHandler("resources\\departments.csv");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        ArrayList<Object> departmentsToChoose = departments.readFromCSV(0);
-        String department = (String) choice(departmentsToChoose);
+        CSVReader departments;
+        departments = new CSVReader("src/Occupations/resources/departments.csv");
+        ArrayList<String> departmentsToChoose = departments.readColFromCSV(0);
+        String department = choice(departmentsToChoose);
 
         //If our string equals a department, call the initOccupation method
-        Occupation toReturn = initOccupation(department);
-        return toReturn;
+        return initOccupation(department);
     }
 
     /**
-     * Initialises our Occupation Object for our Occupation subClass
+     * Initialises our Occupations.Occupation Object for our Occupations.Occupation subClass
      * Reads data from our CSV to return a unique list of Choices
      * Returns the Choice they made and assigns it to the specified class Variable
-     * in Occupation types
-     * @return Occupation Object
+     * in Occupations.Occupation types
+     * @return Occupations.Occupation Object
      */
     private Occupation initOccupation(String department){
         try {
             //Create a csvHandler for the given departments csv file
-            CSVHandler chosenDepartment = new CSVHandler("resources\\"+department+".csv");
+            CSVReader chosenDepartment = new CSVReader("src/Occupations/resources/"+department+".csv");
 
             //List all jobTitle Choices
-            ArrayList<Object> jobTitles = chosenDepartment.readFromCSV(1);
+            ArrayList<String> jobTitles = chosenDepartment.readColFromCSV(1);
 
             //Make the user choose a job title
-            String jobTitle = (String) choice(jobTitles);
+            String jobTitle = choice(jobTitles);
 
             //From this use the SortByKey method to obtain a point value
-            ArrayList<Object> pointRange = chosenDepartment.sortByKey(jobTitle,2);
-            String pointValue = (String) choice(pointRange);
+            ArrayList<String> pointRange = chosenDepartment.sortByKey(jobTitle,2);
+            String pointValue =  choice(pointRange);
             int pointValueParsed = Integer.parseInt(pointValue);
 
             //Create a string that represents the current tuple of our csv file
@@ -65,46 +67,43 @@ public class OccupationMenu {
 
             //Our salary will be returned in the for "[EuroSign] 120,000" so we need to fix the format before
             //We parse it
-            tempSalary = stringFixFormat(tempSalary);
+            tempSalary = FormatManager.stringFixFormat(tempSalary);
             double salary = Double.parseDouble(tempSalary);
 
-            //Remove all whitespace in our department name so it fits the Enum data-types
-            department = department.replaceAll(" ", "");
-
-            //Construct a Occupation subclass by getting the data at value of our department
-            //And calling our create occupation method
-
-            Occupation occupation = new Occupation(department,jobTitle,pointValueParsed,salary);
-            return occupation;
+            return new Occupation(department,jobTitle,pointValueParsed,salary); // Returns the instantiated Occupation object
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private String stringFixFormat(String target){
-        target = target.replace("€", "");
-        target = target.replaceAll("\"","");
-        target = target.replace(",","");
-        return target;
-    }
-
-    public Object choice(ArrayList<Object> occupationTypes) {
-        char index = 'A';
-        for (Object occupation : occupationTypes) {
-            System.out.printf("%s) %s \n", index, occupation);
-            index++;
+    /**
+     * A choice method that gets the users choice from the array list of string passed through
+     * @param occupationTypes The specified data needed to instantiate the occupation
+     * @return occupationTypes.get(n) which is a string that represents the users choice
+     */
+    public String choice(ArrayList<String> occupationTypes)
+    {
+        char index = 'A'; // The index of the choices for the User
+        for (String occupation : occupationTypes) // For each occupation String in the arrayList of type string
+        {
+            System.out.printf("%s) %s \n", index, occupation); // Print out the data like the follow
+            // "A) Option 1"
+            index++; // Increment Index by 1
         }
+        // Read the user input, trim any white space and set it to uppercase
         System.out.print("Your Choice: ");
         String userChoice = in.nextLine().trim().toUpperCase();
 
         // Check if input is a single letter within the expected range
-        if (userChoice.length() == 1) {
-            int n = userChoice.charAt(0) - 'A';
-            if (n >= 0 && n < occupationTypes.size()) {
-                return occupationTypes.get(n);
+        if (userChoice.length() == 1)
+        {
+            int n = userChoice.charAt(0) - 'A'; // Gets the index by subtracting the ASCII value of A from the choice ASCII
+            if (n >= 0 && n < occupationTypes.size())  // If the index is 0 or more and if it is within the range of the size of occupationTypes.size()
+            {
+                return occupationTypes.get(n); // Return the value stored there
             }
         }
-        System.out.println("Invalid choice. Please select a valid option.");
+        System.out.println("Invalid choice. Please select a valid option."); // Tell the user they picked an invalid option
         return null;
     }
 

@@ -8,25 +8,23 @@ package Occupations;
  * @version 1.0
  */
 public class Occupation {
+    // Class Attributes
     private final String department;
     private String jobTitle;
     private int currentPoints;
     private double salary;
-    private int ascensionCount;
 
-    //No-arg constructor to be called in the employees class when creating an employee instance
+    // No-arg constructor to be called in the employees class when creating an employee instance
     public Occupation(String department, String jobTitle, int currentPoints, double salary){
-        this.department = department;
-        this.jobTitle = jobTitle;
-        this.currentPoints = currentPoints;
-        this.salary = salary;
-        ascensionCount = 0;
+        this.department = department; // Sets the department
+        this.jobTitle = jobTitle; // Sets the job title
+        this.currentPoints = currentPoints; // Sets the current points
+        this.salary = salary; // Sets the salary
     }
 
     /**
      * Getter method for jobTitle:
-     * Returns JobTitle
-     * @return
+     * @return jobTitle
      */
     public String getJobTitle(){
         return jobTitle;
@@ -35,7 +33,7 @@ public class Occupation {
     /**
      * Getter method for current Points
      * returns the Current points for an employee object
-     * @return
+     * @return currentPoints
      */
     public int getCurrentPoints(){
         return currentPoints;
@@ -43,6 +41,7 @@ public class Occupation {
 
     /**
      * Getter method for departments
+     * @return department
      */
     public String getDepartment()
     {
@@ -52,41 +51,54 @@ public class Occupation {
     /**
      * Getter method for current Points
      * Returns the current points for an employee Object
-     * @return
+     * @return salary
      */
     public double getSalary(){
         return salary;
     }
 
-    public int getAscensionCount() {
-        return ascensionCount;
-    }
-
+    /**
+     * Setter method for current points (To be used in the ascension and upgrade methods)
+     * @param newPoint the new point value
+     */
     public void setCurrentPoints(int newPoint){
         currentPoints = newPoint;
     }
 
+    /**
+     * Sets the employees new salary based off the data for their occupation
+     * @param salary the new salary
+     */
     public void setSalary(double salary) {
         this.salary = salary;
     }
 
+    /**
+     * Sets the employees new job title if they promote their current job
+     * @param jobTitle the new job title being assigned
+     */
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
 
-
-    public void setAscensionCount(int ascensionCount) {
-        this.ascensionCount = ascensionCount;
-    }
-
+    /**
+     * To string method for the Occupation class that returns all occupation data
+     * @return A formatted string of the employees occupational data
+     */
     public String toString()
     {
-        return String.format("Occupations.Occupation: %s\n" +
-                              "Job Title: %s\n" +
-                               "Point Value: %d \n" +
-                                "Salary %.2f \n",department,getJobTitle(),getCurrentPoints(),getSalary());
+        return String.format("""
+                Occupation: %s
+                Job Title: %s
+                Point Value: %d\s
+                Salary %.2f\s
+                """,department,getJobTitle(),getCurrentPoints(),getSalary());
     }
 
+    /**
+     * Formats the occupation into a string that can be written to a csv using CSV writer.
+     * @return String.format("%s,%s,%d,%.2f",department,jobTitle,currentPoints,salary);
+     */
     public String toCSV()
     {
         return String.format("%s,%s,%d,%.2f",department,jobTitle,currentPoints,salary);
