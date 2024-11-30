@@ -1,3 +1,4 @@
+
 package UserType;
 
 import java.io.IOException;
@@ -10,6 +11,10 @@ public class Employees{
     // List of employees
     protected ArrayList<UserTypes> listOfEmployees = new ArrayList<>();
 
+     /**
+      * Reads employee data from a CSV file and initialises a list of UserTypes objects based on the data
+      * @return
+      */
     public Employees()
     {
         CSVReader reader = null;
@@ -46,46 +51,52 @@ public class Employees{
 
     }
 
-    // Back up method that adds employee to the list, is called in the UserType.Employee class
+    /**
+     * Back up method that adds employee to the list, is called in the UserType.Employee class
+     * @param employee
+     */
     public void addEmployee(UserTypes employee){
-        if(listOfEmployees.contains(employee)){
-            System.out.println("UserType.Employee already exists.");
-        }else{
+        if(!listOfEmployees.contains(employee)){
                 listOfEmployees.add(employee);
+            try {
+                writeToEmployeeData("employees.csv");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    
+    /**
+     * Removes an employee from the list of employees and from the CSV file where their data is stored
+     * @param employee
+     */
     public void removeEmployee(UserTypes employee){
         listOfEmployees.remove(employee);
         try {
             writeToEmployeeData("employees.csv");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("There was an error writing to the csv File try again!");
         }
     }
 
-    // Checks what type of user you are in order to give you access to the list of employees
+
+    /**
+     * Checks what type of user you are in order to give you access to the list of employees
+     * @return
+     */
     public ArrayList<UserTypes> getListOfEmployees(){
         return listOfEmployees;
     }
 
-   // shows a specific employees info based on the user type
-    public UserTypes employeeInformation(int employee_ID, UserTypes requestingUser){
+   /**
+    * shows a specific employees info based on the user type
+    * @param employee_ID
+    * @return user
+    */
+    public UserTypes employeeInformation(int employee_ID){
         for(UserTypes user : listOfEmployees){
             if(user.getEmployee_ID() == employee_ID){
-
-                if(requestingUser instanceof Admin || requestingUser instanceof HR || user.equals(requestingUser)){
-
-                    return user;
-
-                }
-                else{
-
-                    System.out.println("Access denied.");
-                    return null;
-
-                }
+                return user;
             }
         }
 
@@ -94,6 +105,11 @@ public class Employees{
 
     }
 
+    /**
+     * Writes employees data into a CSV file
+     * @param fileName
+     * @throws IOException
+     */
     public void writeToEmployeeData(String fileName) throws IOException{
 
         ArrayList<String> write = new ArrayList<String>();
@@ -108,5 +124,4 @@ public class Employees{
 
         CSvWriter.OverWriteData(write);
     }
-
 }
