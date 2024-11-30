@@ -1,9 +1,8 @@
 package PaymentProcess;
 
-import UserType.UserTypes;
 import FileHandler.*;
+import UserType.UserTypes;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -51,7 +50,7 @@ public class Payslip {
     }
 
     public String getFirstName(){
-        return getEmployee().getFirstName();
+        return getEmployee().getFirst_Name();
     }
 
     public String getLastName(){
@@ -72,7 +71,7 @@ public class Payslip {
      * @return
      */
 
-    public String toString(PaymentProcess payslip) throws IOException{
+    public String toString() {
 
         String payslipLine = String.join(", ", String.valueOf(getEmployeeID()), getFirstName(), getLastName(), getPPSNumber(), getDateOfPayslip().toString(),
                 String.format("%.2f", getPaymentProcess().getGrossPay()),
@@ -86,29 +85,10 @@ public class Payslip {
         return payslipLine;
     }
 
-    /**
-     * Method to write a payslip to a CSV file and use a file not found exception in the method
-     * signaature to throw the error if the file is not found at execution.
-     * @param payslip
-     * @throws FileNotFoundException
-     */
 
-    public void payslipToCSV(PaymentProcess payslip, String fileName) throws IOException{
-        //Make a CSVHandler object for handling writing the payslip to CSV.
-        CSVWriter csvWriter = new CSVWriter("src\\PaymentProcess\\PayslipHistory\\" ,fileName + ".csv");
-
-        //Make an array list of type object to then fill with the second toString method that separates every
-        //piece of information for the payslip by commas to then write it to my CSV file.
-        ArrayList<String> payslipHistory = new ArrayList<>();
-        payslipHistory.add(toString(payslip));
-
-        //Call the CSVHandler.CSVWriter classes writeToCSV method to write my second toString() method into the csv file.
-        csvWriter.writeToCSV(payslipHistory);
-    }
-
-    public void getPayslipData() throws FileNotFoundException {
+    public static void getPayslipData(String userName) throws IOException {
         //folder to hold the directory to the folder holding csv files
-        String folder = "src\\PaymentProcess\\PayslipHistory";
+        String folder = "src/PaymentProcess/PayslipHistory/";
         FolderReader reader = new FolderReader(folder);
         //array list to hold the csv file names as strings
         ArrayList<String> payslipHistoryNames = reader.getFileNames();
@@ -117,7 +97,7 @@ public class Payslip {
         //instantiate a csv reader object to read the directory and the choice the user makes
         CSVReader csvReader = new CSVReader(folder + userChoice);
         //reads the data in the csv file the user chooses
-        String payslipData = csvReader.tupleFind(getUsername());
+        String payslipData = csvReader.findLine(userName,0);
 
         //conditional statements for if user is or is not found.
         if(payslipData != null){
@@ -127,10 +107,10 @@ public class Payslip {
             StringBuilder payslipString = new StringBuilder();
             payslipString.append("======== PAYSLIP ======== \n\n");
             payslipString.append("|RECEIVER INFORMATION| \n\n");
-            payslipString.append("FIRST NAME: ").append(data[0]).append("\n");
-            payslipString.append("LAST NAME: ").append(data[1]).append("\n");
-            payslipString.append("PPS NUMBER: ").append(data[2]).append("\n");
-            payslipString.append("EMPLOYEE ID: ").append(data[3]).append("\n\n");
+            payslipString.append("FIRST NAME: ").append(data[1]).append("\n");
+            payslipString.append("LAST NAME: ").append(data[2]).append("\n");
+            payslipString.append("PPS NUMBER: ").append(data[3]).append("\n");
+            payslipString.append("EMPLOYEE ID: ").append(data[0]).append("\n\n");
 
             payslipString.append("DATE OF PAYMENT: ").append(data[4]).append("\n\n");
 
@@ -150,7 +130,7 @@ public class Payslip {
         }
     }
 
-    public String retrieveUserChoice(ArrayList<String>payslipHistoryNames){
+    public static String retrieveUserChoice(ArrayList<String> payslipHistoryNames){
         Scanner in = new Scanner(System.in);
 
         //using aski values to use letters as the choice values in hte command line for users
