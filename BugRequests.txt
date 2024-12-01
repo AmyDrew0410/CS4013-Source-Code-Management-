@@ -1,0 +1,8 @@
+1. Ensure login data for a user is removed if they are (Security issue) [FIXED]
+2. Ensuring employees can be made without interfering with the scanners reading [FIXED]
+3. Fixed issues where system would exit due to no exception handling in the paymentCycle manager class [FIXED]
+4. Fixed issue where data would truncate on creation of an invalid employee object [FIXED]
+
+To-Fix:
+1. Employee menu doesn't print to screen 
+2. Need to add part-time payment form functionality for each part time object to the cycle methods
